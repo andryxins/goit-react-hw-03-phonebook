@@ -11,6 +11,26 @@ export default class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    try {
+      const persistedData = localStorage.getItem('contacts');
+      if (persistedData)
+        this.setState({ contacts: [...JSON.parse(persistedData)] });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  componentDidUpdate() {
+    const { contacts } = this.state;
+
+    try {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   handleAddContact = (name, number) => {
     const { contacts } = this.state;
 
@@ -42,26 +62,6 @@ export default class App extends Component {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
-
-  componentDidMount() {
-    try {
-      const persistedData = localStorage.getItem('contacts');
-      if (persistedData)
-        this.setState({ contacts: [...JSON.parse(persistedData)] });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  componentDidUpdate() {
-    const { contacts } = this.state;
-
-    try {
-      localStorage.setItem('contacts', JSON.stringify(contacts));
-    } catch (e) {
-      console.log(e);
-    }
-  }
 
   render() {
     const { contacts, filter } = this.state;

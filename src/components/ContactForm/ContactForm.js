@@ -8,11 +8,11 @@ const INITIAL_STATE = {
 };
 
 export default class ContactForm extends Component {
-  state = { ...INITIAL_STATE };
-
   static propTypes = {
     addContact: PropTypes.func.isRequired,
   };
+
+  state = { ...INITIAL_STATE };
 
   handleChange = e => {
     const { name, value } = e.target;
