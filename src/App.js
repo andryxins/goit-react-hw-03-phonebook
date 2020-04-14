@@ -46,7 +46,8 @@ export default class App extends Component {
   componentDidMount() {
     try {
       const persistedData = localStorage.getItem('contacts');
-      this.setState({ contacts: [...JSON.parse(persistedData)] });
+      if (persistedData)
+        this.setState({ contacts: [...JSON.parse(persistedData)] });
     } catch (e) {
       console.log(e);
     }
